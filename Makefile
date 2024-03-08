@@ -16,7 +16,7 @@ test: broker
 run:
 	@docker compose \
 		-f ./compose.yaml \
-		up
+		up --build
 
 .PHONY: coverage
 coverage: test

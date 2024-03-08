@@ -14,7 +14,7 @@ func main() {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			entity.StartFreezer("tcp://localhost:1891")
+			entity.StartFreezer("tcp://broker:1891")
 		}()
 	}
 	wg.Wait()
