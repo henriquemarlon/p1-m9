@@ -6,7 +6,6 @@ import (
 	"math/rand"
 	"time"
 	"math"
-	"github.com/google/uuid"
 )
 
 var RefrigeratorTemperature = map[string]Interval{
@@ -26,12 +25,12 @@ func GenerateRefrigeratorPayload() float64 {
 	return data
 }
 
-func StartRefrigerator(url string) {
+func StartRefrigerator(id string, url string) {
 	client := ConnectMQTT(rand.NewSource(time.Now().UnixNano()), url)
 
 	for {
 		data := Data{
-			ID:          uuid.New().String(),
+			ID:          id,
 			Type:        "refrigerator",
 			Temperature: GenerateRefrigeratorPayload(),
 			TimeStamp:   time.Now().String(),

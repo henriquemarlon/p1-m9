@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"sync"
+
 	"github.com/henriquemarlon/p1-m9/internal/domain/entity"
 )
 
@@ -12,10 +14,11 @@ func main() {
 
 	for i := 0; i < numStations; i++ {
 		wg.Add(1)
-		go func() {
+		go func(stationID int) {
 			defer wg.Done()
-			entity.StartRefrigerator("tcp://broker:1891")
-		}()
+			stationName := fmt.Sprintf("ST-%v", stationID)
+			entity.StartRefrigerator(stationName, "tcp://broker:1891")
+		}(i)
 	}
 	wg.Wait()
 }

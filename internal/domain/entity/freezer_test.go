@@ -48,7 +48,7 @@ func TestFreezerMessageTransmissionAndQOS(t *testing.T) {
 	done := make(chan bool)
 
 	go func() {
-		StartFreezer("tcp://localhost:1891")
+		StartFreezer("ST-1", "tcp://localhost:1891")
 		done <- true
 	}()
 

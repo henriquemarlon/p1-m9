@@ -48,7 +48,7 @@ func TestRefrigeratorMessageTransmissionAndQOS(t *testing.T) {
 	done := make(chan bool)
 
 	go func() {
-		StartRefrigerator("tcp://localhost:1891")
+		StartRefrigerator("ST-1", "tcp://localhost:1891")
 		done <- true
 	}()
 

@@ -17,23 +17,23 @@ var messagePubHandler MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Me
 	switch data.Type {
 	case "freezer":
 		if data.Temperature > -15 {
-			fmt.Printf("%v [ALERT High Temperature - Freezer] \n", data.Temperature)
+			fmt.Printf("%s - Temperature: %v ºC [ALERT High Temperature - Freezer] \n", data.ID, data.Temperature)
 		}
 		if data.Temperature < -25 {
-			fmt.Printf("%v [ALERT Low Temperature - Freezer] \n", data.Temperature)
+			fmt.Printf("%s - Temperature: %v ºC [ALERT Low Temperature - Freezer] \n", data.ID, data.Temperature)
 		}
 		if data.Temperature > -25 && data.Temperature < -15  {
-			fmt.Printf("%s %v [OK] \n", data.Type, data.Temperature)
+			fmt.Printf("%s - Temperature: %v ºC [OK Freezer] \n", data.ID, data.Temperature)
 		}
 	case "refrigerator":
 		if data.Temperature > 10 {
-			fmt.Printf("%v [ALERT High Temperature - Refrigerator] \n", data.Temperature)
+			fmt.Printf("%s - Temperature: %v ºC [ALERT High Temperature - Refrigerator] \n", data.ID, data.Temperature)
 		}
 		if data.Temperature < 2 {
-			fmt.Printf("%v [ALERT Low Temperature - Refrigerator] \n", data.Temperature)
+			fmt.Printf("%s - Temperature: %v ºC [ALERT Low Temperature - Refrigerator] \n", data.ID, data.Temperature)
 		}
 		if data.Temperature > 2 && data.Temperature < 10  {
-			fmt.Printf("%s %v [OK] \n", data.Type, data.Temperature)
+			fmt.Printf("%s - Temperature: %v ºC [OK Refrigerator] \n", data.ID, data.Temperature)
 		}
 	}
 }
