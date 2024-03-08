@@ -23,9 +23,8 @@ make test
 ###### Output:
 
 ```shell
-[+] Running 2/2
- ✔ Network p1-m9_default     Created                                                                                                                                  0.1s 
- ✔ Container p1-m9-broker-1  Started                                                                                                                                  0.1s 
+[+] Running 1/1
+ ✔ Container p1-m9-broker-1  Started                                                                                                                                       0.0s 
 Running the tests
 ?       github.com/henriquemarlon/p1-m9/cmd/freezer     [no test files]
 ?       github.com/henriquemarlon/p1-m9/cmd/refrigerator        [no test files]
@@ -35,21 +34,21 @@ Running the tests
 === RUN   TestConnectFreezerMQTT
 --- PASS: TestConnectFreezerMQTT (0.00s)
 === RUN   TestFreezerMessageTransmissionAndQOS
-    freezer_test.go:68: New message on topic /sectors: {"id":"57cfbe4f-7689-4668-ad73-40818e0d3ea5","type":"freezer","temperature":-29,"timestamp":"2024-03-08 11:14:43.27210963 -0300 -03 m=+0.010450153"}
---- PASS: TestFreezerMessageTransmissionAndQOS (2.01s)
+    freezer_test.go:68: New message on topic /sectors: {"id":"ST-1","type":"freezer","temperature":-18,"timestamp":"2024-03-08 15:58:06.464641995 -0300 -03 m=+0.009711507"}
+--- PASS: TestFreezerMessageTransmissionAndQOS (2.00s)
 === RUN   TestGenerateRefrigeratorPayload
 --- PASS: TestGenerateRefrigeratorPayload (0.00s)
 === RUN   TestConnectRefrigeratorMQTT
 --- PASS: TestConnectRefrigeratorMQTT (0.00s)
 === RUN   TestRefrigeratorMessageTransmissionAndQOS
-    refrigerator_test.go:68: New message on topic /sectors: {"id":"6db9b78f-5453-4559-a444-0e882fb74f9c","type":"refrigerator","temperature":11,"timestamp":"2024-03-08 11:14:45.284938156 -0300 -03 m=+2.023278679"}
---- PASS: TestRefrigeratorMessageTransmissionAndQOS (2.01s)
+    refrigerator_test.go:68: New message on topic /sectors: {"id":"ST-1","type":"refrigerator","temperature":2,"timestamp":"2024-03-08 15:58:08.4738584 -0300 -03 m=+2.018927982"}
+--- PASS: TestRefrigeratorMessageTransmissionAndQOS (2.00s)
 PASS
 coverage: 87.5% of statements
-ok      github.com/henriquemarlon/p1-m9/internal/domain/entity  4.032s  coverage: 87.5% of statements
+ok      github.com/henriquemarlon/p1-m9/internal/domain/entity  4.023s  coverage: 87.5% of statements
 [+] Running 2/2
- ✔ Container p1-m9-broker-1  Removed                                                                                                                                  0.2s 
- ✔ Network p1-m9_default     Removed 
+ ✔ Container p1-m9-broker-1  Removed                                                                                                                                       0.2s 
+ ✔ Network p1-m9_default     Removed  
 ```
 
 > [!NOTE]
@@ -68,31 +67,46 @@ make run
 ###### Output:
 
 ```shell
-broker-1        | 1709907632: New connection from 172.29.0.3:54964 on port 1891.
-broker-1        | 1709907632: New client connected from 172.29.0.3:54964 as station-4818599352286748591 (p2, c1, k30).
-broker-1        | 1709907632: New connection from 172.29.0.4:43566 on port 1891.
-broker-1        | 1709907632: New client connected from 172.29.0.4:43566 as station-5554683134450851365 (p2, c1, k30).
-broker-1        | 1709907632: New connection from 172.29.0.5:47822 on port 1891.
-broker-1        | 1709907632: New client connected from 172.29.0.5:47822 as subscriber (p2, c1, k30).
-subscriber-1    | 11 [ALERT High Temperature - Refrigerator] 
-subscriber-1    | refrigerator 6 [OK] 
-subscriber-1    | -29 [ALERT Low Temperature - Freezer] 
-subscriber-1    | 0 [ALERT Low Temperature - Refrigerator] 
-subscriber-1    | 1 [ALERT Low Temperature - Refrigerator] 
-subscriber-1    | freezer -17 [OK] 
-subscriber-1    | refrigerator 8 [OK] 
-subscriber-1    | 1 [ALERT Low Temperature - Refrigerator] 
-subscriber-1    | -29 [ALERT Low Temperature - Freezer] 
-subscriber-1    | refrigerator 4 [OK] 
-subscriber-1    | freezer -20 [OK] 
-subscriber-1    | 11 [ALERT High Temperature - Refrigerator] 
-subscriber-1    | refrigerator 6 [OK] 
-subscriber-1    | refrigerator 4 [OK] 
-subscriber-1    | -11 [ALERT High Temperature - Freezer] 
-subscriber-1    | refrigerator 6 [OK] 
-subscriber-1    | refrigerator 4 [OK] 
-subscriber-1    | refrigerator 5 [OK] 
-subscriber-1    | refrigerator 8 [OK]
+subscriber-1    | ST-0 - Temperature: 4 ºC [OK Refrigerator] 
+subscriber-1    | ST-0 - Temperature: 3 ºC [OK Refrigerator] 
+subscriber-1    | ST-1 - Temperature: -19 ºC [OK Freezer] 
+subscriber-1    | ST-2 - Temperature: -20 ºC [OK Freezer] 
+subscriber-1    | ST-4 - Temperature: -14 ºC [ALERT High Temperature - Freezer] 
+subscriber-1    | ST-3 - Temperature: -20 ºC [OK Freezer] 
+subscriber-1    | ST-0 - Temperature: 9 ºC [OK Refrigerator] 
+subscriber-1    | ST-0 - Temperature: 3 ºC [OK Refrigerator] 
+subscriber-1    | ST-0 - Temperature: 8 ºC [OK Refrigerator] 
+subscriber-1    | ST-2 - Temperature: -18 ºC [OK Freezer] 
+subscriber-1    | ST-3 - Temperature: -23 ºC [OK Freezer] 
+subscriber-1    | ST-4 - Temperature: -21 ºC [OK Freezer] 
+subscriber-1    | ST-0 - Temperature: -16 ºC [OK Freezer] 
+subscriber-1    | ST-1 - Temperature: -26 ºC [ALERT Low Temperature - Freezer] 
+subscriber-1    | ST-0 - Temperature: 7 ºC [OK Refrigerator] 
+subscriber-1    | ST-1 - Temperature: -19 ºC [OK Freezer] 
+subscriber-1    | ST-3 - Temperature: -16 ºC [OK Freezer] 
+subscriber-1    | ST-2 - Temperature: -21 ºC [OK Freezer] 
+subscriber-1    | ST-4 - Temperature: -24 ºC [OK Freezer] 
+subscriber-1    | ST-0 - Temperature: 9 ºC [OK Refrigerator] 
+subscriber-1    | ST-0 - Temperature: 3 ºC [OK Refrigerator] 
+subscriber-1    | ST-4 - Temperature: -10 ºC [ALERT High Temperature - Freezer] 
+subscriber-1    | ST-1 - Temperature: -10 ºC [ALERT High Temperature - Freezer] 
+subscriber-1    | ST-2 - Temperature: -28 ºC [ALERT Low Temperature - Freezer] 
+subscriber-1    | ST-3 - Temperature: -22 ºC [OK Freezer] 
+subscriber-1    | ST-0 - Temperature: -22 ºC [OK Freezer] 
+subscriber-1    | ST-3 - Temperature: -24 ºC [OK Freezer] 
+subscriber-1    | ST-2 - Temperature: -29 ºC [ALERT Low Temperature - Freezer] 
+subscriber-1    | ST-1 - Temperature: -26 ºC [ALERT Low Temperature - Freezer] 
+subscriber-1    | ST-0 - Temperature: -27 ºC [ALERT Low Temperature - Freezer] 
+subscriber-1    | ST-0 - Temperature: 0 ºC [ALERT Low Temperature - Refrigerator] 
+subscriber-1    | ST-0 - Temperature: 12 ºC [ALERT High Temperature - Refrigerator] 
+subscriber-1    | ST-0 - Temperature: 11 ºC [ALERT High Temperature - Refrigerator] 
+subscriber-1    | ST-1 - Temperature: -12 ºC [ALERT High Temperature - Freezer] 
+subscriber-1    | ST-3 - Temperature: -19 ºC [OK Freezer] 
+subscriber-1    | ST-0 - Temperature: -19 ºC [OK Freezer] 
+subscriber-1    | ST-2 - Temperature: -29 ºC [ALERT Low Temperature - Freezer] 
+subscriber-1    | ST-4 - Temperature: -18 ºC [OK Freezer] 
+subscriber-1    | ST-0 - Temperature: 9 ºC [OK Refrigerator] 
+subscriber-1    | ST-0 - Temperature: 7 ºC [OK Refrigerator] 
 ```
 
 > [!NOTE]
