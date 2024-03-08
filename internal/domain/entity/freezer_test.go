@@ -24,7 +24,7 @@ func TestConnectFreezerMQTT(t *testing.T) {
 	}
 }
 
-func TestFreezerMessageTransmission(t *testing.T) {
+func TestFreezerMessageTransmissionAndQOS(t *testing.T) {
 	var receipts []string
 
 	var handler MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Message) {

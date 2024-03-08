@@ -24,7 +24,7 @@ func TestConnectRefrigeratorMQTT(t *testing.T) {
 	}
 }
 
-func TestRefrigeratorMessageTransmission(t *testing.T) {
+func TestRefrigeratorMessageTransmissionAndQOS(t *testing.T) {
 	var receipts []string
 
 	var handler MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Message) {
