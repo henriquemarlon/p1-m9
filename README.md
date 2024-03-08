@@ -1,6 +1,6 @@
 # P1-M9
 
-O código contido neste recorte do projeto representa o sistema de simulação e, futuramente, também abrangerá as APIs requeridas pelo sistema. Este projeto foi construído conforme as [golang-standards](https://github.com/golang-standards/project-layout) [^1].
+O código contido neste repositório representa o sistema de simulação. Este projeto foi construído conforme as [golang-standards](https://github.com/golang-standards/project-layout) [^1].
 
 ## Dependências:
 
