@@ -1,4 +1,4 @@
-# Backend
+# P1-M9
 
 O código contido neste recorte do projeto representa o sistema de simulação e, futuramente, também abrangerá as APIs requeridas pelo sistema. Este projeto foi construído conforme as [golang-standards](https://github.com/golang-standards/project-layout) [^1].
 
@@ -23,17 +23,33 @@ make test
 ###### Output:
 
 ```shell
-[+] Running 1/1
- ✔ Container backend-broker-1  Started                                                                                                          0.0s 
-Running the tests
-?       github.com/Inteli-College/2024-T0002-EC09-G04/cmd/api-test      [no test files]
-?       github.com/Inteli-College/2024-T0002-EC09-G04/cmd/simulation    [no test files]
-ok      github.com/Inteli-College/2024-T0002-EC09-G04/internal/gas      0.003s  coverage: 100.0% of statements
-ok      github.com/Inteli-College/2024-T0002-EC09-G04/internal/rad_lum  0.003s  coverage: 100.0% of statements
-ok      github.com/Inteli-College/2024-T0002-EC09-G04/pkg/station       2.011s  coverage: 88.5% of statements
 [+] Running 2/2
- ✔ Container backend-broker-1  Removed                                                                                                          0.2s 
- ✔ Network backend_default     Removed  
+ ✔ Network p1-m9_default     Created                                                                                                                                  0.1s 
+ ✔ Container p1-m9-broker-1  Started                                                                                                                                  0.1s 
+Running the tests
+?       github.com/henriquemarlon/p1-m9/cmd/freezer     [no test files]
+?       github.com/henriquemarlon/p1-m9/cmd/refrigerator        [no test files]
+?       github.com/henriquemarlon/p1-m9/cmd/subscriber  [no test files]
+=== RUN   TestGenerateFreezerPayload
+--- PASS: TestGenerateFreezerPayload (0.00s)
+=== RUN   TestConnectFreezerMQTT
+--- PASS: TestConnectFreezerMQTT (0.00s)
+=== RUN   TestFreezerMessageTransmissionAndQOS
+    freezer_test.go:68: New message on topic /sectors: {"id":"57cfbe4f-7689-4668-ad73-40818e0d3ea5","type":"freezer","temperature":-29,"timestamp":"2024-03-08 11:14:43.27210963 -0300 -03 m=+0.010450153"}
+--- PASS: TestFreezerMessageTransmissionAndQOS (2.01s)
+=== RUN   TestGenerateRefrigeratorPayload
+--- PASS: TestGenerateRefrigeratorPayload (0.00s)
+=== RUN   TestConnectRefrigeratorMQTT
+--- PASS: TestConnectRefrigeratorMQTT (0.00s)
+=== RUN   TestRefrigeratorMessageTransmissionAndQOS
+    refrigerator_test.go:68: New message on topic /sectors: {"id":"6db9b78f-5453-4559-a444-0e882fb74f9c","type":"refrigerator","temperature":11,"timestamp":"2024-03-08 11:14:45.284938156 -0300 -03 m=+2.023278679"}
+--- PASS: TestRefrigeratorMessageTransmissionAndQOS (2.01s)
+PASS
+coverage: 87.5% of statements
+ok      github.com/henriquemarlon/p1-m9/internal/domain/entity  4.032s  coverage: 87.5% of statements
+[+] Running 2/2
+ ✔ Container p1-m9-broker-1  Removed                                                                                                                                  0.2s 
+ ✔ Network p1-m9_default     Removed 
 ```
 
 > [!NOTE]
@@ -52,10 +68,31 @@ make run
 ###### Output:
 
 ```shell
-broker-1      | 1708301841: New client connected from 172.22.0.3:39954 as station-2805345190559206082 (p2, c1, k30).
-broker-1      | 1708301841: New connection from 172.22.0.4:51230 on port 1891.
-broker-1      | 1708301841: New client connected from 172.22.0.4:51230 as subscriber (p2, c1, k30).
-api-test-1    | Received: {"location":"{\"latitude\":36.000000,\"longitude\":16.000000}","gas":"{\"CO2\":526.000000,\"CO\":7.000000,\"NO2\":343.000000,\"MP10\":404.000000,\"MP25\":179.000000}","rad_lum":"{\"ET\":267.000000,\"LI\":3.000000,\"SR\":241.000000}","timestamp":"2024-02-19 00:17:21.311444485 +0000 UTC m=+0.004634198"} from: /stations
+broker-1        | 1709907632: New connection from 172.29.0.3:54964 on port 1891.
+broker-1        | 1709907632: New client connected from 172.29.0.3:54964 as station-4818599352286748591 (p2, c1, k30).
+broker-1        | 1709907632: New connection from 172.29.0.4:43566 on port 1891.
+broker-1        | 1709907632: New client connected from 172.29.0.4:43566 as station-5554683134450851365 (p2, c1, k30).
+broker-1        | 1709907632: New connection from 172.29.0.5:47822 on port 1891.
+broker-1        | 1709907632: New client connected from 172.29.0.5:47822 as subscriber (p2, c1, k30).
+subscriber-1    | 11 [ALERT High Temperature - Refrigerator] 
+subscriber-1    | refrigerator 6 [OK] 
+subscriber-1    | -29 [ALERT Low Temperature - Freezer] 
+subscriber-1    | 0 [ALERT Low Temperature - Refrigerator] 
+subscriber-1    | 1 [ALERT Low Temperature - Refrigerator] 
+subscriber-1    | freezer -17 [OK] 
+subscriber-1    | refrigerator 8 [OK] 
+subscriber-1    | 1 [ALERT Low Temperature - Refrigerator] 
+subscriber-1    | -29 [ALERT Low Temperature - Freezer] 
+subscriber-1    | refrigerator 4 [OK] 
+subscriber-1    | freezer -20 [OK] 
+subscriber-1    | 11 [ALERT High Temperature - Refrigerator] 
+subscriber-1    | refrigerator 6 [OK] 
+subscriber-1    | refrigerator 4 [OK] 
+subscriber-1    | -11 [ALERT High Temperature - Freezer] 
+subscriber-1    | refrigerator 6 [OK] 
+subscriber-1    | refrigerator 4 [OK] 
+subscriber-1    | refrigerator 5 [OK] 
+subscriber-1    | refrigerator 8 [OK]
 ```
 
 > [!NOTE]
